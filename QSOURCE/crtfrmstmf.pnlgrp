@@ -105,4 +105,18 @@ The parameters are specific to the compile command and will be added to the comm
 before the command is executed.
 :ehelp.
 
+:help name='CRTFRMSTMF/PROMPT'.Prompt command (PROMPT) - Help
+:xh3.Prompt command (PROMPT)
+:p.
+Specifies whether the object creation command is prompted before it is executed.
+:parml.
+:pt.:pk def.*YES:epk.
+:pd.
+The object creation command is prompted before it is executed.
+:pt.:pk def.*NO:epk.
+:pd.
+The object creation command is executed immediately.
+:eparml.
+:ehelp.
+
 :epnlgrp.

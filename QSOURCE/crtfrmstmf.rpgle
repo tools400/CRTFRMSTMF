@@ -15,6 +15,7 @@ DCL-PR CRTFRMSTMF;
     Cmd      CHAR(10);
     pSrcStmf CHAR(5002);
     pParms   CHAR(2002);
+    isPrompt IND;
 END-PR;
 
 DCL-PI CRTFRMSTMF;
@@ -22,6 +23,7 @@ DCL-PI CRTFRMSTMF;
     Cmd      CHAR(10);
     pSrcStmf CHAR(5002);
     pParms   CHAR(2002);
+    isPrompt IND;
 END-PI;
 
 
@@ -148,7 +150,7 @@ END-PR;
 dcl-pr cl_dltf;
    lib char(10) const;
    file char(10) const;
-end-pr;  
+end-pr;
 
 // Standard API error return structure
 DCL-DS APIError QUALIFIED;
@@ -242,7 +244,7 @@ ENDIF;
 
 
 // Create temporary source file
-cl_dltf ('QTEMP': 'QSOURCE');   
+cl_dltf ('QTEMP': 'QSOURCE');
 
 // Source physical files that are unicode create problems with CRTPF. Use Job's CCSID instead.
 IF (CCSID = 1208 OR CCSID = 819);
@@ -268,6 +270,12 @@ CommandString = %TRIMR(Cmd) + ' '
               + %TRIMR(ObjTypes(i)) + '(' + %TRIMR(Lib) + '/' + %TRIMR(Obj) + ') '
               + 'SRCFILE(QTEMP/QSOURCE) SRCMBR(' + %TRIMR(Obj) + ') '
               + %SUBST(Parms:1:ParmsLen);
+
+if  ( isPrompt );
+  OptCtlBlk.Prompt = '1';
+else;
+  OptCtlBlk.Prompt = '0';
+endif;
 
 CALLP ProcessCommand(CommandString:%SIZE(CommandString):OptCtlBlk:%SIZE(OptCtlBlk):
                      'CPOP0100':UpdatedString:%SIZE(UpdatedString):UpdatedStringLen:

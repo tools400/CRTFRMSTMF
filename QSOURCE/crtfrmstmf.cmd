@@ -21,6 +21,11 @@
              PARM       KWD(PARMS) TYPE(*CHAR) LEN(2000) VARY(*YES *INT2) +
                           CASE(*MONO) PROMPT('Additional parameters')
 
+             PARM       KWD(PROMPT) TYPE(*LGL) +
+                          SPCVAL((*YES '1') (*NO '0')) DFT(*YES) +
+                          CHOICE('*YES, *NO') +
+                          PMTCTL(*PMTRQS) PROMPT('Prompt command')
+
  QUAL1:      QUAL       TYPE(*NAME) LEN(10) RSTD(*NO) MIN(1)
              QUAL       TYPE(*NAME) LEN(10) RSTD(*NO) DFT(*CURLIB) +
                           SPCVAL((*CURLIB)) MIN(0) PROMPT('Library')
